@@ -258,12 +258,14 @@ def Sorgu():
         if data is not None:
             data=str(data)
             data=int(data[1:len(data)-2]) 
-            datum=db.session.query(AktifUser.fromID).first()                
+            datum=db.session.query(AktifUser.fromID).first() 
+            print(datum)              
             datum=str(datum)                
             datum=int(datum[1:len(datum)-2]) 
+            print(datum)  
             data2=db.session.query(Odunc.uyeID).filter(Odunc.KitapID==data).first()
             dataKontrol=str(db.session.query(Odunc.VermeTarihi).filter(Odunc.KitapID==data).all())
-            if (data2 is  None) or (None in dataKontrol)==False :                              
+            if (data2 is  None) or (dataKontrol==False) :                              
                 top=int(db.session.query(Odunc.uyeID).count())+1               
                 date1=""+str(an.day)+"/"+str(an.month)+"/"+str(an.year)
                 data2=Odunc( top,datum,data,date1,None,None,None) 
@@ -280,9 +282,9 @@ def Sorgu():
             else :
                 data2=str(data2)
                 data2=int(data2[1:len(data2)-2]) 
-                
-                personel =AktifUser.query.filter_by(toID=datum).first()  
-                personel.toID = datum   
+                print(datum)  
+                personel =AktifUser.query.filter_by(fromID=datum).first()  
+                personel.toID = data2   
                 personel.kitapID = data                    
                 db.session.commit()       
                 return render_template('OduncAlmaN.html')  
@@ -415,14 +417,14 @@ def CalisanEkleD():
         if vardiya=="1":
             vardiya=False            
         maas=request.form.get("maas")
-        top=int(db.session.query(Calisan.uyeID).count())+1
+        top=int(db.session.query(Calisan.uyeID).count())+71
         sifrenmbr=random.randint(1,100)
         sifre=str(top)+"Sifrec"+str(sifrenmbr)        
         date1=""+str(an.day)+"/"+str(an.month)+"/"+str(an.year) 
         data=Calisan(top,sifre,date1,isim,dogumtarihi,sigortano,maas,gorev,vardiyaDeger)
         db.session.add(data)
         db.session.commit()  
-        data=Iletisim(None,adres,email,telefon)  
+        data=Iletisim(None,adres,email,telefon,top)   
         db.session.add(data)
         db.session.commit()      
         return render_template('SistemYoneticisi.html',mesaj="")      
