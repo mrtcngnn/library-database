@@ -1,0 +1,36 @@
+body{
+    background-color: black;
+}
+#general-container{
+    background-image: url("https://wallpaperaccess.com/full/2862101.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    margin-top: 4rem;
+    align-items: center;
+    border: 5px double white;
+    padding: 20px;
+}
+#baslik{
+    color: white;
+}
+#odunc-baslik{
+    font-size: 30px;
+    color: white;
+}
+#rezervasyon-button{
+    font-size: 65px;
+}
+#mesaj{
+    color: white;
+    font-size: 25px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+#buton{
+    font-size: 30px;
+}
+#label{
+    font-size: 15px;
+    font-weight: 500;
+    color: white;
+}

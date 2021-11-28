@@ -1,0 +1,28 @@
+#mesaj{
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+}
+#labels{
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+#cikti{
+    color: white;
+}
+#general-container{
+    background-image: url("https://wallpaperaccess.com/full/2862101.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    margin-top: 13rem;
+    align-items: center;
+    border: 5px double white;
+}
+body{
+    background-color: black;
+}
+#buton{
+    font-size: 20px;
+}

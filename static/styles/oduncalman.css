@@ -1,0 +1,29 @@
+#general-container{
+    background-image: url("https://wallpaperaccess.com/full/2862101.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    margin-top: 9rem;
+    align-items: center;
+    border: 5px double white;
+}
+body{
+    background-color: black;
+}
+#mesaj{
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+}
+#labels{
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
+#buton{
+    font-size: 20px;
+}
+#mesaj-kutusu{
+    border: none;
+    border-radius: 10%;
+}

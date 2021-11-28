@@ -1,0 +1,1045 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.0
+-- Dumped by pg_dump version 14.0
+
+-- Started on 2021-11-28 15:49:36
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 2 (class 3079 OID 16384)
+-- Name: adminpack; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS adminpack WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 3428 (class 0 OID 0)
+-- Dependencies: 2
+-- Name: EXTENSION adminpack; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION adminpack IS 'administrative functions for PostgreSQL';
+
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 226 (class 1259 OID 17193)
+-- Name: AktifUser; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."AktifUser" (
+    "fromID" integer NOT NULL,
+    "kitapID" integer NOT NULL,
+    "toID" integer NOT NULL
+);
+
+
+ALTER TABLE public."AktifUser" OWNER TO postgres;
+
+--
+-- TOC entry 225 (class 1259 OID 17192)
+-- Name: AktifUser_fromID_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."AktifUser_fromID_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."AktifUser_fromID_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3429 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: AktifUser_fromID_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."AktifUser_fromID_seq" OWNED BY public."AktifUser"."fromID";
+
+
+--
+-- TOC entry 218 (class 1259 OID 17098)
+-- Name: Calisan; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Calisan" (
+    "uyeID" integer NOT NULL,
+    "Sifre" character varying(30) NOT NULL,
+    "IseBaslama" character varying(30) NOT NULL,
+    "Isim" character varying(30) NOT NULL,
+    "DogumTarihi" character varying(30) NOT NULL,
+    "SigortaNo" character varying(30) NOT NULL,
+    "Maas" integer NOT NULL,
+    "Gorev" character varying(30) NOT NULL,
+    "Vardiya" boolean NOT NULL
+);
+
+
+ALTER TABLE public."Calisan" OWNER TO postgres;
+
+--
+-- TOC entry 217 (class 1259 OID 17097)
+-- Name: Calisan_uyeID_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Calisan_uyeID_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Calisan_uyeID_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3430 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: Calisan_uyeID_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Calisan_uyeID_seq" OWNED BY public."Calisan"."uyeID";
+
+
+--
+-- TOC entry 216 (class 1259 OID 17090)
+-- Name: Iletisim; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Iletisim" (
+    "uyeID" integer,
+    "Adres" character varying(200) NOT NULL,
+    "E_Mail" character varying(30) NOT NULL,
+    "TelNo" character varying,
+    "calisanID" integer
+);
+
+
+ALTER TABLE public."Iletisim" OWNER TO postgres;
+
+--
+-- TOC entry 211 (class 1259 OID 17057)
+-- Name: Kitap; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Kitap" (
+    "KitapID" integer NOT NULL,
+    "YazarID" integer NOT NULL,
+    "YayinEviID" integer NOT NULL,
+    "Isim" character varying(30) NOT NULL,
+    "BaskiNo" integer NOT NULL,
+    "SayfaSayisi" integer NOT NULL
+);
+
+
+ALTER TABLE public."Kitap" OWNER TO postgres;
+
+--
+-- TOC entry 210 (class 1259 OID 17056)
+-- Name: Kitap_KitapID_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Kitap_KitapID_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Kitap_KitapID_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3431 (class 0 OID 0)
+-- Dependencies: 210
+-- Name: Kitap_KitapID_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Kitap_KitapID_seq" OWNED BY public."Kitap"."KitapID";
+
+
+--
+-- TOC entry 228 (class 1259 OID 25371)
+-- Name: Masa; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Masa" (
+    "MasaID" integer NOT NULL,
+    "S8_10" boolean NOT NULL,
+    "S10_12" boolean NOT NULL,
+    "S12_14" boolean NOT NULL,
+    "S14_16" boolean NOT NULL,
+    "S16_18" boolean NOT NULL,
+    "S18_20" boolean NOT NULL
+);
+
+
+ALTER TABLE public."Masa" OWNER TO postgres;
+
+--
+-- TOC entry 227 (class 1259 OID 25370)
+-- Name: Masa_MasaID_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Masa_MasaID_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Masa_MasaID_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3432 (class 0 OID 0)
+-- Dependencies: 227
+-- Name: Masa_MasaID_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Masa_MasaID_seq" OWNED BY public."Masa"."MasaID";
+
+
+--
+-- TOC entry 224 (class 1259 OID 17186)
+-- Name: Message; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Message" (
+    "MesageID" integer NOT NULL,
+    "kitapID" integer NOT NULL,
+    "fromID" integer NOT NULL,
+    "toID" integer NOT NULL,
+    mesage character varying(300) NOT NULL
+);
+
+
+ALTER TABLE public."Message" OWNER TO postgres;
+
+--
+-- TOC entry 223 (class 1259 OID 17185)
+-- Name: Message_MesageID_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Message_MesageID_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Message_MesageID_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3433 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: Message_MesageID_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Message_MesageID_seq" OWNED BY public."Message"."MesageID";
+
+
+--
+-- TOC entry 222 (class 1259 OID 17144)
+-- Name: Odunc; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Odunc" (
+    "OduncID" integer NOT NULL,
+    "uyeID" integer NOT NULL,
+    "KitapID" integer NOT NULL,
+    "AlmaTarihi" character varying(30) NOT NULL,
+    "VermeTarihi" character varying(30),
+    "Yorum" character varying(200),
+    "YorumPuan" integer
+);
+
+
+ALTER TABLE public."Odunc" OWNER TO postgres;
+
+--
+-- TOC entry 221 (class 1259 OID 17143)
+-- Name: Odunc_OduncID_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Odunc_OduncID_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Odunc_OduncID_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3434 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: Odunc_OduncID_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Odunc_OduncID_seq" OWNED BY public."Odunc"."OduncID";
+
+
+--
+-- TOC entry 220 (class 1259 OID 17109)
+-- Name: Uye; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Uye" (
+    "uyeID" integer NOT NULL,
+    "Sifre" character varying(30) NOT NULL,
+    "UyelikBaslama" character varying(30) NOT NULL,
+    "UyelikBitis" character varying(30) NOT NULL,
+    "Isim" character varying(30) NOT NULL,
+    "DogumTarihi" character varying(30) NOT NULL,
+    "CezaPuani" integer NOT NULL,
+    "OduncKitapSayisi" integer NOT NULL
+);
+
+
+ALTER TABLE public."Uye" OWNER TO postgres;
+
+--
+-- TOC entry 219 (class 1259 OID 17108)
+-- Name: Uye_uyeID_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Uye_uyeID_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Uye_uyeID_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3435 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: Uye_uyeID_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Uye_uyeID_seq" OWNED BY public."Uye"."uyeID";
+
+
+--
+-- TOC entry 213 (class 1259 OID 17066)
+-- Name: YayinEvi; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."YayinEvi" (
+    "YayinEviID" integer NOT NULL,
+    "Isim" character varying(30) NOT NULL,
+    "KurulusTarihi" character varying(30) NOT NULL,
+    "KitapSayisi" integer NOT NULL
+);
+
+
+ALTER TABLE public."YayinEvi" OWNER TO postgres;
+
+--
+-- TOC entry 212 (class 1259 OID 17065)
+-- Name: YayinEvi_YayinEviID_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."YayinEvi_YayinEviID_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."YayinEvi_YayinEviID_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3436 (class 0 OID 0)
+-- Dependencies: 212
+-- Name: YayinEvi_YayinEviID_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."YayinEvi_YayinEviID_seq" OWNED BY public."YayinEvi"."YayinEviID";
+
+
+--
+-- TOC entry 215 (class 1259 OID 17075)
+-- Name: Yazar; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Yazar" (
+    "YazarID" integer NOT NULL,
+    "Isim" character varying(30) NOT NULL,
+    "DogumTarihi" character varying(30) NOT NULL,
+    "KitapSayisi" integer NOT NULL
+);
+
+
+ALTER TABLE public."Yazar" OWNER TO postgres;
+
+--
+-- TOC entry 214 (class 1259 OID 17074)
+-- Name: Yazar_YazarID_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Yazar_YazarID_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Yazar_YazarID_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3437 (class 0 OID 0)
+-- Dependencies: 214
+-- Name: Yazar_YazarID_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Yazar_YazarID_seq" OWNED BY public."Yazar"."YazarID";
+
+
+--
+-- TOC entry 3216 (class 2604 OID 17196)
+-- Name: AktifUser fromID; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."AktifUser" ALTER COLUMN "fromID" SET DEFAULT nextval('public."AktifUser_fromID_seq"'::regclass);
+
+
+--
+-- TOC entry 3212 (class 2604 OID 17101)
+-- Name: Calisan uyeID; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Calisan" ALTER COLUMN "uyeID" SET DEFAULT nextval('public."Calisan_uyeID_seq"'::regclass);
+
+
+--
+-- TOC entry 3209 (class 2604 OID 17060)
+-- Name: Kitap KitapID; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Kitap" ALTER COLUMN "KitapID" SET DEFAULT nextval('public."Kitap_KitapID_seq"'::regclass);
+
+
+--
+-- TOC entry 3217 (class 2604 OID 25374)
+-- Name: Masa MasaID; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Masa" ALTER COLUMN "MasaID" SET DEFAULT nextval('public."Masa_MasaID_seq"'::regclass);
+
+
+--
+-- TOC entry 3215 (class 2604 OID 17189)
+-- Name: Message MesageID; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Message" ALTER COLUMN "MesageID" SET DEFAULT nextval('public."Message_MesageID_seq"'::regclass);
+
+
+--
+-- TOC entry 3214 (class 2604 OID 17147)
+-- Name: Odunc OduncID; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Odunc" ALTER COLUMN "OduncID" SET DEFAULT nextval('public."Odunc_OduncID_seq"'::regclass);
+
+
+--
+-- TOC entry 3213 (class 2604 OID 17112)
+-- Name: Uye uyeID; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Uye" ALTER COLUMN "uyeID" SET DEFAULT nextval('public."Uye_uyeID_seq"'::regclass);
+
+
+--
+-- TOC entry 3210 (class 2604 OID 17069)
+-- Name: YayinEvi YayinEviID; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."YayinEvi" ALTER COLUMN "YayinEviID" SET DEFAULT nextval('public."YayinEvi_YayinEviID_seq"'::regclass);
+
+
+--
+-- TOC entry 3211 (class 2604 OID 17078)
+-- Name: Yazar YazarID; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Yazar" ALTER COLUMN "YazarID" SET DEFAULT nextval('public."Yazar_YazarID_seq"'::regclass);
+
+
+--
+-- TOC entry 3420 (class 0 OID 17193)
+-- Dependencies: 226
+-- Data for Name: AktifUser; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."AktifUser" ("fromID", "kitapID", "toID") FROM stdin;
+3	7	1
+\.
+
+
+--
+-- TOC entry 3412 (class 0 OID 17098)
+-- Dependencies: 218
+-- Data for Name: Calisan; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Calisan" ("uyeID", "Sifre", "IseBaslama", "Isim", "DogumTarihi", "SigortaNo", "Maas", "Gorev", "Vardiya") FROM stdin;
+71	Sifre123	07/11/2021	Deniz CinarPasa	15 Ocak 1993	147852365	4500	Kitap Alım	t
+72	Sifre123	07/11/2021	Sefa Sazcı	1 Ocak 2001	178523641	5500	Kitap Alım	f
+73	Sifre123	07/11/2021	Birkan Öksüzlü	19 Mart 1996	985214706	3700	Temizlik	t
+74	Sifre123	07/11/2021	Anil Cira	8 Temmuz 1994	985201476	4200	Temizlik	f
+5	5Sifrec4	27/11/2021	mert	7/12/1994	123456789852	4200	kitap dizimi	f
+\.
+
+
+--
+-- TOC entry 3410 (class 0 OID 17090)
+-- Dependencies: 216
+-- Data for Name: Iletisim; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Iletisim" ("uyeID", "Adres", "E_Mail", "TelNo", "calisanID") FROM stdin;
+1	yurt	asy@gmail.com	05447489636	\N
+2	Ev	mcg@gmail.com	05444871069	\N
+3	yurt	ma@gmail.com	05514897437	\N
+\N	Home	cls1@gmail.com	054478965211	71
+\N	Home	cls2@gmail.com	05114785266	72
+\N	Home	cls3@gmail.com	05444103695	73
+\N	Home	cls4@gmail.com	05748962108	74
+4	home	ag@gmail.com	05412659832	\N
+5	yurt	afra@gmail.com	054412589632	\N
+7	ev	ebp@gmail.com	054412368952	\N
+\N	ev	mertc@gmail.com	05444753622	\N
+8	yurt	mb@gmail.com	051125896325	\N
+\.
+
+
+--
+-- TOC entry 3405 (class 0 OID 17057)
+-- Dependencies: 211
+-- Data for Name: Kitap; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Kitap" ("KitapID", "YazarID", "YayinEviID", "Isim", "BaskiNo", "SayfaSayisi") FROM stdin;
+1	3	4	Bir Ömür Nasıl Yaşanır	2	288
+2	3	4	Eski Dünya Seyahatnamesi	2	288
+3	1	1	Kaşağı	14	64
+4	3	1	Osmanlı Barışı	4	240
+5	3	1	Gazi Mustafa Kemal Atatürk	11	480
+6	4	4	Kızıl Dosya	4	207
+7	4	1	Baskervillelerin köpeği	2	208
+8	4	2	Dörtlerin Yemini	2	331
+9	5	4	savaşçı	19	392
+10	5	1	İçimizdeki Çocuk	41	254
+11	5	1	Var Misin	16	320
+12	5	3	İçimizdeki Biz	21	379
+13	2	3	Geleceğin Fiziği	7	524
+14	2	3	Zihnin Geleceğin	9	514
+15	1	1	Yalnız Efe	21	64
+16	1	2	Üç Nasihat	7	48
+17	1	1	Bahar ve Kelebekler	13	180
+18	1	2	Falaka	2	45
+19	1	2	Vire	2	80
+20	1	1	Cancağızım	14	216
+21	3	3	İstanbul'dan Sayfalar	13	304
+\.
+
+
+--
+-- TOC entry 3422 (class 0 OID 25371)
+-- Dependencies: 228
+-- Data for Name: Masa; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Masa" ("MasaID", "S8_10", "S10_12", "S12_14", "S14_16", "S16_18", "S18_20") FROM stdin;
+1	t	t	f	f	f	f
+5	f	f	f	f	f	f
+6	f	f	f	f	f	f
+7	f	f	f	f	f	f
+8	f	f	f	f	f	f
+9	f	f	f	f	f	f
+10	f	f	f	f	f	f
+11	f	f	f	f	f	f
+12	f	f	f	f	f	f
+13	f	f	f	f	f	f
+14	f	f	f	f	f	f
+15	f	f	f	f	f	f
+16	f	f	f	f	f	f
+17	f	f	f	f	f	f
+18	f	f	f	f	f	f
+19	f	f	f	f	f	f
+20	f	f	f	f	f	f
+21	f	f	f	f	f	f
+22	f	f	f	f	f	f
+23	f	f	f	f	f	f
+24	f	f	f	f	f	f
+25	f	f	f	f	f	f
+26	f	f	f	f	f	f
+27	f	f	f	f	f	f
+28	f	f	f	f	f	f
+29	f	f	f	f	f	f
+30	f	f	f	f	f	f
+31	f	f	f	f	f	f
+32	f	f	f	f	f	f
+33	f	f	f	f	f	f
+2	t	f	f	f	f	f
+3	f	t	f	f	f	f
+4	f	t	f	f	f	f
+\.
+
+
+--
+-- TOC entry 3418 (class 0 OID 17186)
+-- Dependencies: 224
+-- Data for Name: Message; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Message" ("MesageID", "kitapID", "fromID", "toID", mesage) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3416 (class 0 OID 17144)
+-- Dependencies: 222
+-- Data for Name: Odunc; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Odunc" ("OduncID", "uyeID", "KitapID", "AlmaTarihi", "VermeTarihi", "Yorum", "YorumPuan") FROM stdin;
+1	1	1	26/11/2021	27/11/2021	çok güzel bir kitap	5
+2	3	7	28/11/2021	\N	\N	\N
+\.
+
+
+--
+-- TOC entry 3414 (class 0 OID 17109)
+-- Dependencies: 220
+-- Data for Name: Uye; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Uye" ("uyeID", "Sifre", "UyelikBaslama", "UyelikBitis", "Isim", "DogumTarihi", "CezaPuani", "OduncKitapSayisi") FROM stdin;
+4	Sifre123as	26/11/2021	26/11/2024	Abuzer gönen	7/12/2000	0	0
+5	1313afra	26/11/2021	26/11/2024	Afra Gürcan	13/01/2001	0	0
+0	sistem123	01/01/0001	30/12/2999	Sistem Yöneticisi	01/01/0001	0	0
+7	bety1234	26/11/2021	26/11/2024	Betül Parlak	29/11/1998	0	0
+8	123456789	27/11/2021	27/11/2024	Mertcan Biskin	13/03/2000	0	0
+1	Sifre123	07/01/2020	07/01/2023	Ahmed Said Yüksek	01/07/1999	1	1
+2	Sifre123	14/04/2019	14/04/2022	Mert Can Gönen	24/12/1999	1	1
+3	Sifre123	19/06/2021	19/06/2024	Meltem Arman	31/03/2000	0	1
+\.
+
+
+--
+-- TOC entry 3407 (class 0 OID 17066)
+-- Dependencies: 213
+-- Data for Name: YayinEvi; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."YayinEvi" ("YayinEviID", "Isim", "KurulusTarihi", "KitapSayisi") FROM stdin;
+1	İş Bankası Kültür Yayınları	1956	9
+2	Parıltı Yayınları	2005	4
+4	Kronik Kitap	2016	4
+3	Odtü	1996	4
+\.
+
+
+--
+-- TOC entry 3409 (class 0 OID 17075)
+-- Dependencies: 215
+-- Data for Name: Yazar; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Yazar" ("YazarID", "Isim", "DogumTarihi", "KitapSayisi") FROM stdin;
+1	Ömer Seyfettin	11 Mart 1884	7
+4	Arthur Conan Doyle	22 Mayıs 1859	3
+5	Doğan Cüceloğlu	1938	4
+2	Michio Kaku	24 Ocak 1947	2
+3	İlber Ortaylı	21 Mayıs 1947	5
+\.
+
+
+--
+-- TOC entry 3438 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: AktifUser_fromID_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."AktifUser_fromID_seq"', 1, false);
+
+
+--
+-- TOC entry 3439 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: Calisan_uyeID_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Calisan_uyeID_seq"', 1, false);
+
+
+--
+-- TOC entry 3440 (class 0 OID 0)
+-- Dependencies: 210
+-- Name: Kitap_KitapID_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Kitap_KitapID_seq"', 1, false);
+
+
+--
+-- TOC entry 3441 (class 0 OID 0)
+-- Dependencies: 227
+-- Name: Masa_MasaID_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Masa_MasaID_seq"', 1, false);
+
+
+--
+-- TOC entry 3442 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: Message_MesageID_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Message_MesageID_seq"', 1, false);
+
+
+--
+-- TOC entry 3443 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: Odunc_OduncID_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Odunc_OduncID_seq"', 1, false);
+
+
+--
+-- TOC entry 3444 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: Uye_uyeID_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Uye_uyeID_seq"', 1, false);
+
+
+--
+-- TOC entry 3445 (class 0 OID 0)
+-- Dependencies: 212
+-- Name: YayinEvi_YayinEviID_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."YayinEvi_YayinEviID_seq"', 1, false);
+
+
+--
+-- TOC entry 3446 (class 0 OID 0)
+-- Dependencies: 214
+-- Name: Yazar_YazarID_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Yazar_YazarID_seq"', 1, false);
+
+
+--
+-- TOC entry 3251 (class 2606 OID 17198)
+-- Name: AktifUser AktifUser_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."AktifUser"
+    ADD CONSTRAINT "AktifUser_pkey" PRIMARY KEY ("fromID");
+
+
+--
+-- TOC entry 3235 (class 2606 OID 17105)
+-- Name: Calisan Calisan_Isim_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Calisan"
+    ADD CONSTRAINT "Calisan_Isim_key" UNIQUE ("Isim");
+
+
+--
+-- TOC entry 3237 (class 2606 OID 17107)
+-- Name: Calisan Calisan_SigortaNo_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Calisan"
+    ADD CONSTRAINT "Calisan_SigortaNo_key" UNIQUE ("SigortaNo");
+
+
+--
+-- TOC entry 3239 (class 2606 OID 17103)
+-- Name: Calisan Calisan_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Calisan"
+    ADD CONSTRAINT "Calisan_pkey" PRIMARY KEY ("uyeID");
+
+
+--
+-- TOC entry 3231 (class 2606 OID 17094)
+-- Name: Iletisim Iletisim_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Iletisim"
+    ADD CONSTRAINT "Iletisim_pkey" PRIMARY KEY ("E_Mail");
+
+
+--
+-- TOC entry 3233 (class 2606 OID 17096)
+-- Name: Iletisim Iletisim_uyeID_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Iletisim"
+    ADD CONSTRAINT "Iletisim_uyeID_key" UNIQUE ("uyeID");
+
+
+--
+-- TOC entry 3219 (class 2606 OID 17064)
+-- Name: Kitap Kitap_Isim_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Kitap"
+    ADD CONSTRAINT "Kitap_Isim_key" UNIQUE ("Isim");
+
+
+--
+-- TOC entry 3221 (class 2606 OID 17062)
+-- Name: Kitap Kitap_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Kitap"
+    ADD CONSTRAINT "Kitap_pkey" PRIMARY KEY ("KitapID");
+
+
+--
+-- TOC entry 3253 (class 2606 OID 25376)
+-- Name: Masa Masa_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Masa"
+    ADD CONSTRAINT "Masa_pkey" PRIMARY KEY ("MasaID");
+
+
+--
+-- TOC entry 3249 (class 2606 OID 17191)
+-- Name: Message Message_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Message"
+    ADD CONSTRAINT "Message_pkey" PRIMARY KEY ("MesageID");
+
+
+--
+-- TOC entry 3245 (class 2606 OID 17153)
+-- Name: Odunc Odunc_KitapID_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Odunc"
+    ADD CONSTRAINT "Odunc_KitapID_key" UNIQUE ("KitapID");
+
+
+--
+-- TOC entry 3247 (class 2606 OID 17149)
+-- Name: Odunc Odunc_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Odunc"
+    ADD CONSTRAINT "Odunc_pkey" PRIMARY KEY ("OduncID");
+
+
+--
+-- TOC entry 3241 (class 2606 OID 17116)
+-- Name: Uye Uye_Isim_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Uye"
+    ADD CONSTRAINT "Uye_Isim_key" UNIQUE ("Isim");
+
+
+--
+-- TOC entry 3243 (class 2606 OID 17114)
+-- Name: Uye Uye_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Uye"
+    ADD CONSTRAINT "Uye_pkey" PRIMARY KEY ("uyeID");
+
+
+--
+-- TOC entry 3223 (class 2606 OID 17073)
+-- Name: YayinEvi YayinEvi_Isim_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."YayinEvi"
+    ADD CONSTRAINT "YayinEvi_Isim_key" UNIQUE ("Isim");
+
+
+--
+-- TOC entry 3225 (class 2606 OID 17071)
+-- Name: YayinEvi YayinEvi_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."YayinEvi"
+    ADD CONSTRAINT "YayinEvi_pkey" PRIMARY KEY ("YayinEviID");
+
+
+--
+-- TOC entry 3227 (class 2606 OID 17082)
+-- Name: Yazar Yazar_Isim_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Yazar"
+    ADD CONSTRAINT "Yazar_Isim_key" UNIQUE ("Isim");
+
+
+--
+-- TOC entry 3229 (class 2606 OID 17080)
+-- Name: Yazar Yazar_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Yazar"
+    ADD CONSTRAINT "Yazar_pkey" PRIMARY KEY ("YazarID");
+
+
+--
+-- TOC entry 3260 (class 2606 OID 17204)
+-- Name: Message from; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Message"
+    ADD CONSTRAINT "from" FOREIGN KEY ("fromID") REFERENCES public."Uye"("uyeID") NOT VALID;
+
+
+--
+-- TOC entry 3262 (class 2606 OID 17214)
+-- Name: AktifUser from; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."AktifUser"
+    ADD CONSTRAINT "from" FOREIGN KEY ("fromID") REFERENCES public."Uye"("uyeID") NOT VALID;
+
+
+--
+-- TOC entry 3257 (class 2606 OID 17154)
+-- Name: Odunc kitap; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Odunc"
+    ADD CONSTRAINT kitap FOREIGN KEY ("KitapID") REFERENCES public."Kitap"("KitapID") NOT VALID;
+
+
+--
+-- TOC entry 3259 (class 2606 OID 17199)
+-- Name: Message kitap; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Message"
+    ADD CONSTRAINT kitap FOREIGN KEY ("kitapID") REFERENCES public."Kitap"("KitapID") NOT VALID;
+
+
+--
+-- TOC entry 3264 (class 2606 OID 17224)
+-- Name: AktifUser kitap; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."AktifUser"
+    ADD CONSTRAINT kitap FOREIGN KEY ("kitapID") REFERENCES public."Kitap"("KitapID") NOT VALID;
+
+
+--
+-- TOC entry 3261 (class 2606 OID 17209)
+-- Name: Message to; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Message"
+    ADD CONSTRAINT "to" FOREIGN KEY ("toID") REFERENCES public."Uye"("uyeID") NOT VALID;
+
+
+--
+-- TOC entry 3263 (class 2606 OID 17219)
+-- Name: AktifUser to; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."AktifUser"
+    ADD CONSTRAINT "to" FOREIGN KEY ("toID") REFERENCES public."Uye"("uyeID") NOT VALID;
+
+
+--
+-- TOC entry 3256 (class 2606 OID 17133)
+-- Name: Iletisim uye; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Iletisim"
+    ADD CONSTRAINT uye FOREIGN KEY ("uyeID") REFERENCES public."Uye"("uyeID") NOT VALID;
+
+
+--
+-- TOC entry 3258 (class 2606 OID 17159)
+-- Name: Odunc uye; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Odunc"
+    ADD CONSTRAINT uye FOREIGN KEY ("uyeID") REFERENCES public."Uye"("uyeID") NOT VALID;
+
+
+--
+-- TOC entry 3254 (class 2606 OID 17118)
+-- Name: Kitap yayin; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Kitap"
+    ADD CONSTRAINT yayin FOREIGN KEY ("YayinEviID") REFERENCES public."YayinEvi"("YayinEviID") NOT VALID;
+
+
+--
+-- TOC entry 3255 (class 2606 OID 17128)
+-- Name: Kitap yazar; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Kitap"
+    ADD CONSTRAINT yazar FOREIGN KEY ("YazarID") REFERENCES public."Yazar"("YazarID") NOT VALID;
+
+
+-- Completed on 2021-11-28 15:49:37
+
+--
+-- PostgreSQL database dump complete
+--
+

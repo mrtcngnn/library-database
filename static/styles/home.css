@@ -1,0 +1,33 @@
+body{ 
+    background-image: url("https://www.yavuzkoktas.com/wp-content/uploads/2019/05/books.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+#top-container{
+    margin-top: 9rem;
+}
+.loginAlani{
+    font-size: 25px;
+    color: white;
+}
+#baslik{
+    font-size: 60px;
+    color: white;
+}
+::placeholder {
+    color: grey;
+}
+#labels{
+    margin-left: 5rem;
+}
+#buton{
+    margin-right: 17.4rem;
+    font-size: 20px;
+}
+#buton:hover{
+    margin-right: 17.4rem;
+    font-size: 25px;
+    border: 2px inset white;
+}
+

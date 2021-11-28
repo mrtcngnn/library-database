@@ -1,0 +1,48 @@
+body{
+    background-color: black;
+}
+#general-container{
+    background-image: url("https://wallpaperaccess.com/full/2862101.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    margin-top: 7rem;
+    align-items: center;
+    border: 5px double white;
+    padding: 10px;
+}
+#labels{
+    font-size: 30px;
+    font: bold;
+    color: white;
+}
+#secim{
+    font-size: 20px;
+    color: white;
+}
+#mesaj-kutusu{
+    border: none;
+    margin-top: 1rem;
+    border-radius: 5%;
+}
+#buton{
+    font-size: 20px;
+}
+
+input[type=radio] {    
+    height: 1rem;
+    width: 1rem;
+}
+
+input[type=radio]:checked{
+    height: 1.25rem;
+    width: 1.25rem;
+}
+
+.inputAlani{
+    padding: 10px 10px;
+}
+#loginAlani{
+    font-size: 25px;
+    color: white;
+}
